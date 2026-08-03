@@ -1,3 +1,7 @@
+const http = require('http');
+// Render'ın port hatası vermesini önleyen web sunucusu
+http.createServer((req, res) => res.end('Bot Aktif!')).listen(process.env.PORT || 3000);
+
 const mineflayer = require('mineflayer');
 const { pathfinder, movements, goals } = require('mineflayer-pathfinder');
 const Groq = require('groq-sdk');
@@ -7,10 +11,10 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 // Bedrock / Geyser Uyumlu Bot Ayarları
 const bot = mineflayer.createBot({
-  host: process.env.MC_HOST || 'SUNUCU_IP_YAZ', // Örn: 'oyun.aternos.me'
-  port: parseInt(process.env.MC_PORT) || 19132, // Bedrock varsayılan portu 19132'dir!
+  host: process.env.MC_HOST || 'SUNUCU_IP_YAZ',
+  port: parseInt(process.env.MC_PORT) || 19132,
   username: 'AIBot_Bedrock',
-  version: false // Otomatik versiyon tespiti
+  version: false
 });
 
 bot.loadPlugin(pathfinder);
