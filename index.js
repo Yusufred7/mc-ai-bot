@@ -1,5 +1,5 @@
 const http = require('http');
-// Render'ın web servisini açık tutması için gerekli port
+// Render'ın kapanmasını önleyen web sunucusu
 http.createServer((req, res) => res.end('Bot Aktif!')).listen(process.env.PORT || 3000);
 
 const bedrock = require('bedrock-protocol');
@@ -7,11 +7,17 @@ const Groq = require('groq-sdk');
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-// Bedrock Bağlantı Ayarları
+// Otomatik Adres Ayırma (ensarkun.progamer.me:34024 yazılsa bile sorunsuz çalışır)
+let rawHost = process.env.MC_HOST || 'ensarkun.progamer.me';
+let cleanHost = rawHost.split(':')[0].replace('https://', '').replace('http://', '');
+let targetPort = parseInt(process.env.MC_PORT) || 34024;
+
+console.log(`🤖 Bot bağlanıyor: ${cleanHost}:${targetPort}`);
+
 const client = bedrock.createClient({
-  host: process.env.MC_HOST,
-  port: 34024, // Senin gerçek portun sabitlendi!
-  username: 'AIBot_Bedrock',
+  host: cleanHost,
+  port: targetPort,
+  username: 'Roxy',
   offline: true,
   version: '1.20.80' // Sunucunun kabul ettiği Bedrock sürümü
 });
