@@ -1,5 +1,5 @@
 const http = require('http');
-// Render'ın kapanmasını ve port hatasını önleyen web sunucusu
+// Render'ın web servisini açık tutması için gerekli port
 http.createServer((req, res) => res.end('Bot Aktif!')).listen(process.env.PORT || 3000);
 
 const bedrock = require('bedrock-protocol');
@@ -7,13 +7,13 @@ const Groq = require('groq-sdk');
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-// Sunucunun Kabul Ettiği Güncel Bedrock Sürümü (26.32 / 1.20.80)
+// Bedrock Bağlantı Ayarları
 const client = bedrock.createClient({
   host: process.env.MC_HOST,
-  port: parseInt(process.env.MC_PORT) || 19132,
+  port: 34024, // Senin gerçek portun sabitlendi!
   username: 'AIBot_Bedrock',
   offline: true,
-  version: '1.20.80' // Sunucunun istediği tam uyumlu sürüm!
+  version: '1.20.80' // Sunucunun kabul ettiği Bedrock sürümü
 });
 
 client.on('spawn', () => {
