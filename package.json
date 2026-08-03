@@ -8,6 +8,7 @@
   "dependencies": {
     "mineflayer": "^4.20.0",
     "mineflayer-pathfinder": "^2.4.5",
-    "groq-sdk": "^0.15.0"
+    "groq-sdk": "^0.15.0",
+    "bedrock-protocol": "^3.36.0"
   }
 }
